@@ -1,0 +1,22 @@
+Package: NPDR
+Type: Package
+Title: Nonparametric Doubly Robust Estimates of Average Treatment Effects
+Version: 0.1.0
+Authors@R: c(
+    person("Alan", "Mishler", email = "alan@alanmishler.com", role = c("aut", "cre")),
+    person("Ashley", "Nami", email = "ashley.naimi@pitt.edu", role = "aut"))
+Description: This package accompanies the paper "Valid Causal Effect Estimates
+    with Machine Learning Algorithms," by Ashley Naimi, Edward Kennedy, and Alan
+    Mishler. It implements simulations and visualizations to illustrate the
+    estimation of the Average Treatment Effect (aka Average Causal Effect)
+    via singly and doubly robust estimators, using parametric and nonparametric
+    estimators of the nuisance propensity scores and outcome regressions.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports:
+    dplyr,
+    tibble,
+    tmle,
+    sl3
+RoxygenNote: 6.1.1

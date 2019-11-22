@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1574307900035.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "306213504",
+    "id" : "CFE03ADD",
+    "lastKnownWriteTime" : 1574309264,
+    "last_content_update" : 1574309264169,
+    "path" : "~/Documents/Carnegie_Mellon/Causal_Inference_Projects/DoublyRobustSimulations/NPDR/R/functions_analysis.R",
+    "project_path" : "R/functions_analysis.R",
+    "properties" : {
+        "cursorPosition" : "16,0",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
