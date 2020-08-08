@@ -2,11 +2,38 @@
 % Please edit documentation in R/functions_analysis.R
 \name{write_results}
 \alias{write_results}
-\title{Write results.}
+\title{Save simulation results.}
 \usage{
-write_results(results, counter, estimators, outdir, include = "all",
-  suffix = "")
+write_results(
+  results,
+  counter,
+  estimators,
+  outdir,
+  include = "all",
+  suffix = ""
+)
+}
+\arguments{
+\item{results}{The output of simulate_inference().}
+
+\item{counter}{Monte Carlo iteration number. Used to name output files.}
+
+\item{estimators}{The estimators that are included in the results, used to
+name output files.}
+
+\item{outdir}{Directory to write results to.}
+
+\item{include}{Which elements of the results to save, either "all" or some
+subset of c("data", "predictions", "remainder", "metrics", "coefs"), which
+are the components of the results. Nothing will be written for components
+that are NULL.}
+
+\item{suffix}{An additional optional suffix to add to the filenames.}
+}
+\value{
+NULL. As a side effect, this function writes results to outdir. Each
+included component gets its own subdirectory.
 }
 \description{
-Write results.
+Save simulation results.
 }

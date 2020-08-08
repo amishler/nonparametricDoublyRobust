@@ -6,6 +6,9 @@
 \usage{
 expit(x)
 }
+\arguments{
+\item{x}{Real number}
+}
 \description{
 Expit function, aka inverse logit.
 }

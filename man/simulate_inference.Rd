@@ -4,20 +4,102 @@
 \alias{simulate_inference}
 \title{Compare performance of ATE estimators via simulation.}
 \usage{
-simulate_inference(counter, N, beta_a, beta_y, effect_size,
-  estimators = c("aipw", "gcomp", "ipw", "tmle"), nonpar = FALSE,
-  sl_lib_mu = NULL, sl_lib_pi = NULL, cv_folds = 5,
-  bootstrap_reg = FALSE, bootNum = 100, oracle_estimators = NULL,
-  remainder = FALSE)
+simulate_inference(
+  counter,
+  N,
+  beta_a,
+  beta_y,
+  effect_size,
+  interactions = FALSE,
+  estimators = c("aipw", "gcomp", "ipw", "tmle"),
+  nonpar = FALSE,
+  nsplits = 1,
+  sl_lib_mu = NULL,
+  sl_lib_pi = NULL,
+  cv_folds = 5,
+  bootstrap_reg = FALSE,
+  bootNum = 100,
+  oracle_estimators = NULL,
+  remainder = FALSE
+)
 }
 \arguments{
-\item{counter}{Integer used to set up randomization, via set.seed(), and to
-name output files.}
+\item{counter}{Monte Carlo iteration number. Used to set up randomization,
+via set.seed(), and to name output files.}
 
-\item{N}{The number of samples to generate.}
+\item{N}{The number of Monte Carlo samples to generate.}
 
-\item{beta_a}{A length 5 vector of coefficients, where the first coefficient
-is the intercept.}
+\item{beta_a}{Vector of logistic coefficients of length p, relating the
+propensity scores to the covariates. Passed to generate_covariates().}
+
+\item{beta_y}{Vector of linear coefficients of length p, relating the outcome
+Y to the covariates. Passed to generate_covariates().}
+
+\item{effect_size}{The treatment effect, which is constant.}
+
+\item{interactions}{Logical, whether or not to include interaction terms in
+the  design matrices for both the baseline and transformed covariates. FALSE
+by default.}
+
+\item{estimators}{Which estimators to use for nonparametric estimation of the
+nuisance parameters, some subset of c("aipw", "gcomp", "ipw", "tmle"). If
+nonpar == FALSE, then this argument is ignored.}
+
+\item{nonpar}{Logical, whether to estimate the nuisance parameters
+nonparametrically (if TRUE, via specified learners) or parametrically (if
+FALSE, via logistic regression).}
+
+\item{nsplits}{The number of splits to use for sample splitting if
+estimating nuisance parameters nonparametrically.}
+
+\item{sl_lib_mu}{Learners to pass to SuperLearner to estimate the outcome
+regression. Should generally be a vector of strings that refer to functions
+created by SuperLearner::create.Learner(). For example, this argument could
+be c(ranger_learner$names) after having called create.Learner("SL.ranger").
+If nonpar == FALSE, then this argument is ignored.}
+
+\item{sl_lib_pi}{Learners to pass to SuperLearner to estimate the propensity
+regression. If nonpar == FALSE, then this argument is ignored.}
+
+\item{cv_folds}{The number of folds for Superlearner to use internally. Each
+split from 1 to nsplits is passed to SuperLearner, which uses cv_folds for
+its learning procedure.}
+
+\item{bootstrap_reg}{Whether to estimate the variance of the
+g-computation-based estimator. The other estimators all have closed-form
+asymptotic variances. This is computationally expensive, especially if
+nonpar == TRUE, so it is set to FALSE by default.}
+
+\item{bootNum}{The number of bootstrap iterations to use when estimating the
+variance of the g-computation-based estimator. If bootstrap_reg == FALSE,
+then this argument is ignored.}
+
+\item{oracle_estimators}{Which estimators to use to generate oracle
+estimates, some subset of c("aipw", "gcomp", "ipw", "tmle"). Oracle estimates
+use the true propensity scores and outcome regression values. This is useful
+for benchmarking the performance of real estimators. If NULL or "", then no
+oracle estimates are computed.}
+
+\item{remainder}{Whether to compute (an empirical estimate of) the remainder
+terms for the doubly robust estimators. Two remainders are computed, one for
+the baselines covariates X and one for the transformed covariates Z. The
+doubly robust estimators are based on a von Mises expansion that consists of
+an influence function term plus a remainder term. The remainder term
+determines how quickly the doubly robust estimators converge to the truth.
+The remainder term is "second order," meaning that it involves a product of
+the error in the propensity estimator and the error in the outcome regression
+estimator, so the doubly robust estimators are root-n consistent if, for
+example, both the nuisance parameter estimators are consistent at faster than
+n^(1/4) rates. Checking whether the remainder term is shrinking at the
+expected rate can therefore be useful for diagnostic purposes.}
+}
+\value{
+A list of simulation results, which includes the data generated,
+a dataframe of the true and estimated nuisance parameter values, the
+remainders if remainder == TRUE, metrics for the estimators (the bias and
+mse, as well as coverage and width if CIs were computed), and, if
+nonpar == TRUE, the coefficients for the learners in the SuperLearner
+ensemble for both the propensity and outcome regressions.
 }
 \description{
 Compare performance of ATE estimators via simulation.

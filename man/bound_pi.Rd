@@ -14,7 +14,7 @@ bound_pi(pi, lower = 0.025, upper = 0.975)
 \item{upper}{Upper bound.}
 }
 \value{
-The scores, bounded in [lower, upper].
+The bounded scores.
 }
 \description{
 Bound estimated propensity scores away from 0 and 1.

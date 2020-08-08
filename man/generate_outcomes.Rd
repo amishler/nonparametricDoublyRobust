@@ -2,7 +2,7 @@
 % Please edit documentation in R/functions_analysis.R
 \name{generate_outcomes}
 \alias{generate_outcomes}
-\title{Generate treatment levels and outcomes from covariates.}
+\title{Generate treatments and outcomes from covariates.}
 \usage{
 generate_outcomes(X, beta_a, beta_y, effect_size = 6)
 }
@@ -10,23 +10,22 @@ generate_outcomes(X, beta_a, beta_y, effect_size = 6)
 \item{X}{n-by-p matrix of covariate data.}
 
 \item{beta_a}{Vector of logistic coefficients of length p, relating the
-propensity scores to X by the equation \eqn{\pi(X) = expit(X^T \beta_a)}.}
+propensity scores to X.}
 
 \item{beta_y}{Vector of linear coefficients of length p, relating the outcome
-Y to X by the equation \eqn{\mu(X, a) = X^T \beta_y}.}
+Y to X.}
 
-\item{effect_size}{The treatment effect, which is constant.}
+\item{effect_size}{The treatment effect, which is constant (not
+heterogeneous).}
 }
 \value{
-A list containing the treatments A and the outcomes Y, each of length
-n.
+A list containing treatments A and outcomes Y.
 }
 \description{
-Propensity scores \eqn{\pi(X) := P(A = 1|X)} are a logistic function of the
-covariates X. The treatment A is binary, 0 or 1. The outcomes
-\eqn{\mu(X, a) := E[Y|X, A = a]}, for \eqn{a \in {0, 1}}, are linear in
-the covariates, plus independent Gaussian noise, plus a constant treatment
-effect for those who received treatment. Given this structure, the treatment
-and the potential outcomes are independent conditional on X, but not
-marginally because X confounds the treatment and the outcome.
+Propensity scores pi are a logistic function of the covariates X. The
+treatment is binary, 0 or 1. The outcomes are linear in the covariates, plus
+independent Gaussian noise, plus a constant treatment effect for those who
+received treatment. Given this structure, the treatment and the potential
+outcomes are independent conditional on X, but not marginally because X
+confounds the treatment and the outcome.
 }

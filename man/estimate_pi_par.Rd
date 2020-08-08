@@ -12,7 +12,7 @@ estimate_pi_par(A, X)
 \item{X}{A matrix or data frame of covariate values.}
 }
 \value{
-A vector of estimated propensities in [0, 1].
+A vector of estimated treatment propensities P(A = 1|X) in [0, 1].
 }
 \description{
 Estimate propensity scores parametrically, via logistic regression.

@@ -4,7 +4,7 @@
 \alias{estimate_mu_nonpar}
 \title{Estimate outcome regression function nonparametrically using SuperLearner.}
 \usage{
-estimate_mu_nonpar(Y, A, X, sl, ...)
+estimate_mu_nonpar(Y, A, X, sl_lib, nsplits = NULL, split_inds = NULL, ...)
 }
 \arguments{
 \item{Y}{A vector of continuous outcomes of length n.}
@@ -13,17 +13,24 @@ estimate_mu_nonpar(Y, A, X, sl, ...)
 
 \item{X}{A matrix or data frame of covariate values.}
 
-\item{...}{Additional arguments passed to \code{sl3::make_sl3_Task}.}
-
 \item{sl_lib}{A character vector of learner functions created via
 SuperLearner, as in sl_lib <- SuperLearner::create.Learner(...)$names, where
 ... are the learning type and learner parameters. These are passed to
 SuperLearner() to estimate the propensity score function.}
+
+\item{nsplits}{The number of splits to use for sample splitting, if fold
+indices aren't provided to the split_inds argument.}
+
+\item{split_inds}{Fold indices for sample splitting, if nsplits is NULL. One
+of split_inds or nsplits must be provided. split_inds takes precedence if
+it's not NULL.}
+
+\item{...}{Additional arguments passed to SuperLearner.}
 }
 \value{
 An n-by-3 data frame of estimated regression values, where column
-1 = \eqn{E[Y|A, X]}, column 2 = \eqn{E[Y|A=0, X]}, and column 3 =
-\eqn{E[Y|A=1, X]}.
+1 = E[Y|A, X], column 2 = E[Y|A=0, X], and column 3 = E[Y|A=1, X].
+a = 0 (column 1) and a = 1 (column 2).
 }
 \description{
 Outcomes are treated as continuous, meaning that the error distribution in

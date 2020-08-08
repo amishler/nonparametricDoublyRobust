@@ -2,19 +2,18 @@
 % Please edit documentation in R/functions_analysis.R
 \name{generate_covariates}
 \alias{generate_covariates}
-\title{Generate raw and transformed covariates.}
+\title{Generate covariates X and transform it to induce model misspecification.}
 \usage{
-generate_covariates(n)
+generate_covariates(size)
 }
 \arguments{
-\item{n}{Number of samples.}
+\item{size}{Number of samples.}
 }
 \value{
-A list containing two n-by-4 matrices: X, the raw covariates, and Z,
-the transformed version of X.
+A list containing two n-by-4 matrices: X, the baseline covariates, and
+Z, the transformed version of X.
 }
 \description{
-The raw covariates are a 4-dimensional multivariate normal with mean 0 and
-diagonal covariance. They are transformed following Kang \& Schafer, 2007,
-to induce misspecification in the parametric propensity and outcome models.
+Data is 4-dimensional multivariate normal with mean 0 and diagonal
+covariance.
 }

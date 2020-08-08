@@ -2,22 +2,18 @@
 % Please edit documentation in R/functions_analysis.R
 \name{generate_folds}
 \alias{generate_folds}
-\title{Generate indices for CV folds.}
+\title{Generate indices for cross validates folds.}
 \usage{
-generate_folds(n, cv_folds, probs = NULL)
+generate_folds(n, cv_folds)
 }
 \arguments{
-\item{n}{Number of rows in the dataset.}
+\item{n}{Number of rows.}
 
-\item{cv_folds}{Number of folds to create.}
-
-\item{probs}{Probabilities associated with each fold. If NULL, then data
-points are assigned to each fold with equal probability. Fold memberships are
-iid sampled for each data point.}
+\item{cv_folds}{Number of folds.}
 }
 \value{
-A list of row indices corresponding to each fold.
+Vector of indices indicating fold membership.
 }
 \description{
-Generate indices for CV folds.
+Generate indices for cross validates folds.
 }
