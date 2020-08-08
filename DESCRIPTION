@@ -1,4 +1,4 @@
-Package: NPDR
+Package: nonparametricDoublyRobust
 Type: Package
 Title: Nonparametric Doubly Robust Estimates of Average Treatment Effects
 Version: 0.1.0
@@ -12,7 +12,7 @@ Description: This package accompanies the paper "Challenges in Obtaining Valid
     the Average Treatment Effect (aka Average Causal Effect) via singly and
     doubly robust estimators, using parametric and nonparametric estimators of
     the nuisance propensity scores and outcome regressions.
-License: MIT
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Imports:
